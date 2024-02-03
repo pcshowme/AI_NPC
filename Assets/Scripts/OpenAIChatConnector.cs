@@ -28,7 +28,7 @@ public class OpenAIAPIConnector : MonoBehaviour
 
             yield return webRequest.SendWebRequest();
 
-            if (webRequest.isNetworkError || webRequest.isHttpError)
+            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.LogError(webRequest.error);
             }
