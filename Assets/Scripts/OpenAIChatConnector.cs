@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 public class OpenAIAPIConnector : MonoBehaviour
 {
     // Insert your actual API key here
-    private string apiKey = "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";
+    private string apiKey = "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";
     // Use the GPT-3.5 (Davinci) engine
     private string apiURL = "https://api.openai.com/v1/engines/text-davinci-003/completions";
 
