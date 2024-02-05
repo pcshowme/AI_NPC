@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class OpenAIAPIConnector : MonoBehaviour
 {
-    private string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+    private string apiKey = "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";
     private string apiURL = "https://api.openai.com/v1/chat/completions";
 
     void Start()
