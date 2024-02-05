@@ -29,7 +29,7 @@ public class OpenAIAPIConnector : MonoBehaviour
 
         string jsonBody = JsonUtility.ToJson(requestBody, true);
 
-        using (UnityWebRequest webRequest = UnityWebRequest.Post(apiURL, jsonBody))
+        using (UnityWebRequest webRequest = UnityWebRequest.PostWwwForm(apiURL, jsonBody))
         {
             webRequest.SetRequestHeader("Content-Type", "application/json");
             webRequest.SetRequestHeader("Authorization", $"Bearer {apiKey}");

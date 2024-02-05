@@ -14,6 +14,8 @@
 /Assets/StreamingAssets/*.json
 /Assets/StreamingAssets/*.json.meta
 
+# Ignore API Scri[t due to APIKEY
+/Assets/Scripts/OpenAIChatConnector.cs
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
