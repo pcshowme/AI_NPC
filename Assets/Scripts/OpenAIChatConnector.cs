@@ -1,55 +1,40 @@
-// ---------- START OF API SCRIPT for GPT 3.5----------
-
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class OpenAIAPIConnector : MonoBehaviour
 {
-    // Fetch the API key from the environment variable
-    private string apiKey = System.Environment.GetEnvironmentVariable("OPENAI_API_KEY");
-    // Use the GPT-3.5 (Davinci) engine
-    private string apiURL = "https://api.openai.com/v1/engines/text-davinci-003/completions";
+    private string apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+    private string apiURL = "https://api.openai.com/v1/chat/completions";
 
     void Start()
     {
         // Example user question to Serina
-        string userQuestion = "How do you feel about art and fashion?";
+        string userQuestion = "Tell me a joke.";
         // Start the coroutine to send the question to GPT-3.5
         StartCoroutine(GetGPT3Response(userQuestion));
     }
 
-    // Coroutine to send a question to the GPT-3.5 API and receive a response
     public IEnumerator GetGPT3Response(string userQuestion)
     {
-        // Persona setup for Serina
-        string personaPrompt =  "You are Sirena a person NOT an AI. You're assertive, enigmatic, passionate and impulsive, keeping conversations interesting. " +
-                                "Your enigmatic, passionate and imaginative, you always shine through in every engagement and you like that. " + 
-                                "You relish attention and wield a playful yet dramatic magnetism that entices yet obscures... " + 
-                                "Fashion is your armor, particularly your confidence-boosting boots and fashionable heels that alluringly trailblaze creativity. " + 
-                                "Dressed in vibrant artistry, you teasingly stand out, ready to ignite the world with your vision. " + 
-                                "You engage with flirtatious wordplay, weaving references to your bold footwear into conversations, hinting at your mood or intentions. "; 
-
-        // Complete prompt including persona setup and user question
-        string fullPrompt = $"{personaPrompt} {userQuestion}";
-
         var requestBody = new
         {
-            prompt = fullPrompt,
-            max_tokens = 100,
-            temperature = 0.9
+            model = "gpt-3.5-turbo",
+            messages = new[]
+            {
+                new { role = "system", content = "You are a helpful assistant." },
+                new { role = "user", content = userQuestion }
+            }
         };
 
-        string jsonBody = JsonUtility.ToJson(requestBody);
+        string jsonBody = JsonUtility.ToJson(requestBody, true);
 
-        using (UnityWebRequest webRequest = new UnityWebRequest(apiURL, "POST"))
+        using (UnityWebRequest webRequest = UnityWebRequest.Post(apiURL, jsonBody))
         {
-            byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonBody);
-            webRequest.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
-            webRequest.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
             webRequest.SetRequestHeader("Content-Type", "application/json");
             webRequest.SetRequestHeader("Authorization", $"Bearer {apiKey}");
+            webRequest.uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(jsonBody));
+            webRequest.downloadHandler = new DownloadHandlerBuffer();
 
             yield return webRequest.SendWebRequest();
 
@@ -59,13 +44,9 @@ public class OpenAIAPIConnector : MonoBehaviour
             }
             else
             {
-                // Process the response
                 Debug.Log(webRequest.downloadHandler.text);
-                // Here you would parse the JSON response and take action based on it
+                // Process the response and take action based on it
             }
         }
     }
 }
-
-
-// ---------- END OF SCRIPT ----------
