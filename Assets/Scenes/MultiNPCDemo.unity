@@ -1096,6 +1096,19 @@ MonoBehaviour:
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
+--- !u!114 &2019655107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019655092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0fa05ec883d44745ac8663e83fb6a38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  apiKey: 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
 --- !u!137 &2134498607 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7589500584757726966, guid: 1956d106296c39a45b008dfd2404e8b0, type: 3}
@@ -1183,6 +1196,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6203036189532000294, guid: 1956d106296c39a45b008dfd2404e8b0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2019655100}
+    - targetCorrespondingSourceObject: {fileID: 6203036189532000294, guid: 1956d106296c39a45b008dfd2404e8b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2019655107}
   m_SourcePrefab: {fileID: 100100000, guid: 1956d106296c39a45b008dfd2404e8b0, type: 3}
 --- !u!114 &4094024857183195039 stripped
 MonoBehaviour:
